@@ -1,0 +1,119 @@
+{% extends 'base.html' %} 
+{% block body %}
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>Update todo</h3>
+						</div>
+					</div>
+
+
+					{% if messages %}
+					<div class="messages">
+					{% for message in messages %}
+						<div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+							{{ message }}
+						</div>
+					{% endfor %}
+					</div>
+				  {% endif %}
+
+				  
+					<div class="clearfix"></div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 ">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>Update</h2>
+
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<br />
+									<form action="{% url 'save_edit' %}" method="post" enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+                                        {% csrf_token %}
+
+                                        <input hidden type="text" name="user" value="{{data.id}}">
+                                    </div>>
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Task Name <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="first-name" required="required" class="form-control " name="task_name" value="{{data.task_name}}">
+											</div>
+										</div>
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Task Description <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input  type="text" value="{{data.task_description}}" id="last-name" name="task_description" required="required" class="form-control">
+											</div>
+										</div>
+										<div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Start date</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="middle-name" value="{{data.start_date | date:'Y-m-d'}}" class="form-control" type="date" name="start_date">
+											</div>
+										</div>
+                                        <div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">End date</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="middle-name" value="{{data.end_date | date:'Y-m-d'}}" class="form-control" type="date"  name="end_date">
+											</div>
+										</div>
+                                     
+                                        <div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">File</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="middle-name" class="form-control" type="file"  name="file">
+											</div>
+										</div>
+
+                                        <div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Image</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="middle-name" class="form-control" type="file"  name="image" accept="image/*">
+											</div>
+										</div>
+
+                                        <div class="item form-group">
+											<label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status</label>
+											<div class="col-md-6 col-sm-6 ">
+                                                <select name="status" id="status" class="col-md-6 col-sm-6 ">
+                                                    <option value="">select status</option>
+                                                    <option value="pending" {% if data.status == 'pending' %} selected {% endif %}>pending</option>
+                                                    <option value="progress" {% if data.status == 'progress' %} selected {% endif %}>progress</option>
+                                                    <option value="completed" {% if data.status == 'completed' %} selected {% endif %}>completed</option>
+                                                </select>											
+                                            </div>
+										</div>
+                                        
+                                        
+
+									
+										<div class="ln_solid"></div>
+										<div class="item form-group">
+											<div class="col-md-6 col-sm-6 offset-md-3">
+												<!-- <button class="btn btn-primary" type="button">Cancel</button>
+												<button class="btn btn-primary" type="reset">Reset</button> -->
+												<button type="submit" class="btn btn-success">Submit</button>
+											</div>
+										</div>
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+
+
+
+{% endblock %}
